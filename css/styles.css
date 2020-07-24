@@ -16,6 +16,7 @@
   --dark-theme-color: #ffffff;
   --dark-theme-secondary-color: rgba(255, 255, 255, 0.6);
   --dark-theme-background-color: #2f303a;
+  --icon-color: #afb1b8;
 }
 
 html {
@@ -130,6 +131,15 @@ body {
   color: var(--accent-color);
 }
 
+.nav-item-active::after {
+  content: "";
+  display: block;
+  height: 4px;
+  background-color: var(--accent-color);
+  border-radius: 2px;
+  /* margin-top: 28px; */
+}
+
 .header-address-list {
   display: flex;
   align-items: center;
@@ -138,12 +148,21 @@ body {
 .header-address-list-item:not(:last-child) {
   margin-right: 30px;
 }
+
 .header-address-item-link {
   font-weight: 500;
   font-size: 14px;
   line-height: 1.14;
   letter-spacing: 0.02em;
   color: var(--main-text-color);
+  display: flex;
+}
+
+.header-address-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+  fill: currentColor;
 }
 
 .navigation-list .nav-item-active {
@@ -198,10 +217,21 @@ body {
 .hero {
   padding-top: 200px;
   padding-bottom: 200px;
-
+  /* Вопрос max-width или background-size */
+  max-width: 1600px;
+  margin-left: auto;
+  margin-right: auto;
   text-align: center;
-  /* временно! */
-  background-color: #212121;
+  /* background-color: #212121; */
+  background-image: linear-gradient(
+      rgba(47, 48, 58, 0.8),
+      rgba(47, 48, 58, 0.8)
+    ),
+    url(../images/header.jpg);
+  /* background-repeat: no-repeat; */
+  /* background-position: center; */
+  /* background-size: cover; */
+  /* background-size: 1600px; */
 }
 
 .hero-title {
@@ -229,10 +259,6 @@ body {
   display: flex;
 }
 
-.features-list-item {
-  width: 270px;
-}
-
 .features-list-item:not(:last-child) {
   margin-right: 30px;
 }
@@ -241,13 +267,12 @@ body {
   width: 270px;
   height: 120px;
   margin-bottom: 30px;
-  /* Вопрос */
+  /* Вопрос padding или display: flex */
   padding: 25px 100px;
   /* display: flex;
   justify-content: center;
   align-items: center; */
 
-  /* border: 1px solid #afb1b8; */
   border-radius: 4px;
   background-color: var(--secondary-background-color);
 }
@@ -291,7 +316,8 @@ body {
   width: 270px;
   background-color: var(--main-background-color);
   border-radius: 0px 0px 4px 4px;
-  /*  */
+  box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.2), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 1px 3px rgba(0, 0, 0, 0.12);
   padding-bottom: 24px;
 }
 
@@ -325,9 +351,6 @@ body {
 .social-list {
   display: flex;
   justify-content: center;
-
-  /* ВОПРОС */
-  /* padding-bottom: 24px; */
 }
 
 .social-list-item:not(:last-child) {
@@ -335,13 +358,28 @@ body {
 }
 
 .social-list-item-link {
+  width: 44px;
+  height: 44px;
   padding: 12px;
+  border-radius: 50%;
+  color: var(--icon-color);
 }
 
 .social-list-item-link:hover,
 .social-list-item-link:focus {
-  color: var(--accent-color);
-  /* background-color: var(--accent-color); */
+  background-color: var(--accent-color);
+}
+
+.social-link-icon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  /* fill: var(--icon-color); */
+}
+
+.social-list-item-link:hover .social-link-icon,
+.social-list-item-link:focus .social-link-icon {
+  fill: var(--main-background-color);
 }
 
 /* клиенты */
@@ -356,21 +394,32 @@ body {
 .clients-item-link {
   display: flex;
   justify-content: center;
-  align-content: center;
-
+  align-items: center;
   width: 170px;
   height: 90px;
 
-  border: 1px solid #afb1b8;
+  border: 1px solid var(--icon-color);
   border-radius: 4px;
+
+  color: var(--icon-color);
 }
 
 .clients-item-link:hover,
 .clients-item-link:focus {
-  color: var(--accent-color);
-
   border: 1px solid var(--accent-color);
+  color: var(--accent-color);
 }
+
+.clients-item-icon {
+  /* fill: var(--icon-color); */
+  fill: currentColor;
+}
+
+/* Вопрос  color для link или fill для clients-item-icon */
+/* .clients-item-link:hover .clients-item-icon,
+.clients-item-link:focus .clients-item-icon {
+  fill: var(--accent-color);
+} */
 
 /* футер */
 .footer {
@@ -382,7 +431,6 @@ body {
 .footer .container {
   display: flex;
   align-items: baseline;
-  /* ВОПРОС */
   justify-content: space-between;
 }
 
@@ -412,11 +460,20 @@ body {
   color: var(--dark-theme-secondary-color);
 }
 
-.social-join > .title,
-.sign-form > .title {
+.social-join .title,
+.sign-form .title {
   display: block;
   margin-bottom: 20px;
   color: var(--dark-theme-color);
+}
+
+.social-join .social-list-item-link {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: var(--main-background-color);
+}
+.social-join .social-list-item-link:hover {
+  background-color: var(--accent-color);
 }
 
 .sign-form {
@@ -425,7 +482,14 @@ body {
 }
 
 .sign-form .button-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-left: auto;
+}
+
+.sign-form .send-icon {
+  margin-left: 10px;
 }
 
 /* ПОРТФОЛИО */
@@ -476,6 +540,8 @@ body {
 .button-filter:focus {
   color: var(--main-background-color);
   background-color: var(--accent-color);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.08),
+    0px 3px 1px rgba(0, 0, 0, 0.1);
 }
 
 /* проекты */
@@ -491,9 +557,16 @@ body {
   margin-bottom: 30px;
 }
 
+.projects-item-link:hover,
+.projects-item-link:focus {
+  box-shadow: 1px 4px 6px rgba(0, 0, 0, 0.16), 0px 4px 4px rgba(0, 0, 0, 0.06),
+    0px 1px 1px rgba(0, 0, 0, 0.12);
+}
+
 .projects-item-image {
   max-width: 370px;
 }
+
 .project-caption {
   padding-top: 20px;
   padding-left: 24px;
